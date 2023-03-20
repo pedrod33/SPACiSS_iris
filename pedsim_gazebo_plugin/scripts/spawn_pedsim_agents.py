@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Created on Mon Dec  2 17:03:34 2019
 
@@ -15,7 +15,10 @@ from pedsim_msgs.msg  import AgentStates
 global xml_file
 
 def actor_poses_callback(actors):
+    i = 0
     for actor in actors.agent_states:
+        # if i > 3:
+        #     break
         actor_id = str( actor.id )
         actor_pose = actor.pose
         rospy.loginfo("Spawning model: actor_id = %s", actor_id)
@@ -29,6 +32,7 @@ def actor_poses_callback(actors):
                                     actor_pose.orientation.w) )
 
         spawn_model(actor_id, xml_string, "", model_pose, "world")
+        i+=1
     rospy.signal_shutdown("all agents have been spawned !")
 
 
