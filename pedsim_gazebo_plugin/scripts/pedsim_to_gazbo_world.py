@@ -129,7 +129,7 @@ def generate_gzb_world( pedsim_file_name ):
     </sdf>
     
         '''
-    print "gazbo world has been generated: {}".format( gazebo_world)
+    print "gazebo world has been generated: {}".format( gazebo_world)
       
       
       

@@ -1,19 +1,27 @@
 <launch>
         <arg name="tf_prefix" default="" doc="tf_prefix to be used by gazebo plugins and in the robot's urdf etc." />
         <arg name="gui" default="true" />
+        <arg name="paused" default="false"/>
         <!-- this file is auto generated using pedsim_gazebo_plugin pkg --> 
-        <include file="$(find mir_gazebo)/launch/mir_empty_world.launch">
-            <arg name="world_name" value="$(find pedsim_gazebo_plugin)/worlds/scene1.world"/>
+        <include file="$(find dissertation)/launch/mir_empty_world.launch">
+            <arg name="world_name" value="$(find pedsim_gazebo_plugin)/worlds/scene1_small.world"/>
             <arg name="gui" value="$(arg gui)" />
             <arg name="tf_prefix" value="$(arg tf_prefix)" />
-            <arg name="robot_x"   value="17.0" />
-            <arg name="robot_y"   value="11.0" />
+            <arg name="robot_x"   value="1.5" />
+            <arg name="robot_y"   value="5.0" />
+            <arg name="robot_yaw"   value="0" />
+            <arg name="paused" value="$(arg paused)" />
+
         </include>
+
          <!-- this node spawn pedsim actors to gazebo once, then the plugin updates their pose -->  
-         <node pkg="pedsim_gazebo_plugin" type="spawn_pedsim_agents.py" name="spawn_pedsim_agents"  output="screen">
-         </node>
-         
-         <include file="$(find pedsim_simulator)/launch/simple_pedestrians_mir.launch"> </include>
+        <node pkg="pedsim_gazebo_plugin" type="spawn_pedsim_agents.py" name="spawn_pedsim_agents"  output="screen">
+        </node>
+
+        <!-- Spawn people -->
+        <include file="$(find pedsim_simulator)/launch/simple_pedestrians_mir.launch"> </include>
+
+
 
 </launch>
 
